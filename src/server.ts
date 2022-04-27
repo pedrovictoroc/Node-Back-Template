@@ -1,6 +1,6 @@
 import express, { Express } from 'express'
 import * as swaggerUI from 'swagger-ui-express'
-import { swaggerDocument } from './swagger'
+import { swaggerDocument } from './swagger/swagger'
 import { ControllerUoW } from './Controllers/ControllerUoW';
 
 export class Server {
