@@ -5,22 +5,19 @@ import { Database } from "../Database";
 /* 
     User to avoid SQL Injection and others related major problems
 */
-export class QueryHandler {
+export class QueryHandler<T> {
     private pool: Pool
     
     constructor(){
         this.pool = new Database().getPool()
     }
 
-    public async runQuery(sql: string, values: any[] = []): Promise<any[]>{
-        let response: any[] = []
-        await this.pool.query(sql, values).then(res => {
-            response = res.rows;
-        })
-        .catch((err: any) => {
+    public async runQuery(sql: string, values: any[] = []): Promise<T[]>{
+        try{
+            const result = await this.pool.query(sql, values)
+            return result.rows
+        }catch(err: any){
             throw new Error(`Error trying to run query; Stack: ${err}`)
-        })
-
-        return response
+        }
     }
 }

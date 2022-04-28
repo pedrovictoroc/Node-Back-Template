@@ -3,7 +3,7 @@ import { QueryHandler } from "../Handlers/Query.handler"
 import { Client } from '../../Interfaces/Client.interface'
 
 export class ClientRepository {
-    queryHandler: QueryHandler
+    queryHandler: QueryHandler<Client>
 
     constructor(){
         this.queryHandler = new QueryHandler()
