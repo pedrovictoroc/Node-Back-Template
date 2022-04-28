@@ -31,20 +31,49 @@ export class UserController {
     }
 
     private getById(request: Request, response: Response){
-        const result: string[] = []
-
-        result.push("teste")
+        const sucessMessage: string = "Cliente criado com sucesso"
+        const errorMessage: string = "Erro ao buscar cliente"
+        const notFoundMessage: string = "Cliente não encontrado"
     
-        response.json(setApiResponse<string[]>(result))
+        const result: User[] = []
+    
+        try{
+            const toBeFoundUser: User = {
+                name: "string",
+                socialName: "string",
+                document: "string",
+                email: "string",
+                password: "string"
+            }
+            
+            if(!!toBeFoundUser){
+                result.push(toBeFoundUser)
+                return response.status(200).json(setApiResponse<User[]>(result, sucessMessage))
+            }
+            
+            return response.status(400).json(setApiResponse<User[]>(result, notFoundMessage))
+        }
+        catch(err: any){
+            return response.status(400).json(setApiResponse<User[]>(result, errorMessage, err.message))
+        }    
     }
 
-    private create(request: Request, response: Response){
-        const result: User[] = []
+    private create(request: Request, response: Response){    
+        const sucessMessage: string = "Cliente criado com sucesso"
+        const errorMessage: string = "Erro ao buscar cliente"
         
-        const toBeCreatedUser: User = request.body
-
-        result.push(toBeCreatedUser)
+        const result: User[] = []
     
-        response.json(setApiResponse<User[]>(result))
+        try{
+            const toBeCreatedUser: User = request.body
+            
+            result.push(toBeCreatedUser)
+            
+            return response.status(200).json(setApiResponse<User[]>(result, sucessMessage))
+        }
+        catch(err: any){
+            return response.status(400).json(setApiResponse<User[]>(result, errorMessage, err.message))
+        }
+        
     }
 }

@@ -19,10 +19,5 @@ export class AuthController {
     }
 
     private login(request: Request, response: Response){
-        const result: string[] = []
-
-        result.push("teste")
-    
-        response.json(setApiResponse<string[]>(result))
     }
 }

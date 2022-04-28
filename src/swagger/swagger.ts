@@ -1,4 +1,5 @@
 import { User } from './Models/User.swagger'
+import { PostUser } from './Models/PostUser.swagger'
 import { UserPaths } from './Paths/User.swagger'
 
 export const swaggerDocument = {
@@ -26,6 +27,7 @@ export const swaggerDocument = {
       ...UserPaths
     },
     "definitions": {
-        User
+        User,
+        PostUser
     }
 }
