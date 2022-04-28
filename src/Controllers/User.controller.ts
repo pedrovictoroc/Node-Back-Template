@@ -4,7 +4,7 @@ import { setApiResponse } from '../Handlers/ApiResponse.handler'
 
 import { User } from '../Interfaces/Post/PostUser.interface'
 
-import { Database } from '../Repository/Database'
+import { Database } from '../Infrastructure/Database'
 
 export class UserController {
 

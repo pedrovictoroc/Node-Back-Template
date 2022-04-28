@@ -3,7 +3,7 @@ import * as swaggerUI from 'swagger-ui-express'
 import { swaggerDocument } from './swagger/swagger'
 
 import { ControllerUoW } from './Controllers/ControllerUoW';
-import { MigrationUoW } from './Repository/migrations/MigrationUoW'
+import { MigrationUoW } from './Infrastructure/migrations/MigrationUoW'
 
 export class Server {
     server: Express
