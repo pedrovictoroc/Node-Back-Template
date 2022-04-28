@@ -16,9 +16,12 @@ export class MigrationUoW {
     }
 
     async reset() {
-        await this.drop()
-        await this.run()
-
-        console.log("Migration ENABLED and SUCCESSFULLY EXECUTED")
+        try{
+            await this.drop()
+            await this.run()
+            console.log("Migration ENABLED and SUCCESSFULLY EXECUTED")
+        }catch(err: any){
+            throw new Error(err)
+        }
     }
 }

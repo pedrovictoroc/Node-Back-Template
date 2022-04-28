@@ -9,7 +9,7 @@ export class ClientMigration implements Migration{
         this.pool = new Database().getPool()
     }
 
-    run(): Promise<any>{
+    run(): Promise<string>{
         const SQL = `
             CREATE TABLE Client(
                 id serial PRIMARY KEY UNIQUE NOT NULL,    
@@ -24,7 +24,7 @@ export class ClientMigration implements Migration{
         return new Promise((resolve, reject) => {
             this.pool.query(SQL, (err, res) => {
                 if (err) {
-                    throw new Error(`Erro ao executar migration CLIENT; Stack: ${err}`)
+                    reject(`Erro ao executar migration CLIENT; Stack: ${err}`)
                 }
                 else{
                     resolve("")
@@ -33,7 +33,7 @@ export class ClientMigration implements Migration{
         })
     }
 
-    drop(): Promise<any>{
+    drop(): Promise<string>{
         const SQL = `
             DROP TABLE Client
         `
@@ -41,7 +41,7 @@ export class ClientMigration implements Migration{
         return new Promise((resolve, reject) => {
             this.pool.query(SQL, (err, res) => {
                 if (err) {
-                    throw new Error(`Erro ao dropar tabela Client; Stack: ${err}`)
+                    reject(`Erro ao dropar tabela Client; Stack: ${err}`)
                 }else{
                     resolve("")
                 }

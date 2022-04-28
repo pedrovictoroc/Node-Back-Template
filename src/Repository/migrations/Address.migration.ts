@@ -9,7 +9,7 @@ export class AddressMigration implements Migration {
         this.pool = new Database().getPool()
     }
 
-    run(): Promise<any>{
+    run(): Promise<string>{
         const SQL = `
             CREATE TABLE Address(
                 id serial PRIMARY KEY UNIQUE NOT NULL, 
@@ -27,7 +27,7 @@ export class AddressMigration implements Migration {
         return new Promise((resolve, reject) => {
             this.pool.query(SQL, (err, res) => {
                 if (err) {
-                    throw new Error(`Erro ao executar migration Address; Stack: ${err}`)
+                    reject(`Erro ao executar migration Address; Stack: ${err}`)
                 }else{
                     resolve("")
                 }
@@ -35,14 +35,14 @@ export class AddressMigration implements Migration {
         })
     }
 
-    drop(): Promise<any>{
+    drop(): Promise<string>{
         const SQL = `
             DROP TABLE Address
         `
         return new Promise((resolve, reject) => {
             this.pool.query(SQL, (err, res) => {
                 if (err) {
-                    throw new Error(`Erro ao dropar tabela Address; Stack: ${err}`)
+                    reject(`Erro ao dropar tabela Address; Stack: ${err}`)
                 }else{
                     resolve("")
                 }
