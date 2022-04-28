@@ -20,7 +20,7 @@ export class Server {
 
     async setupServer(){
         this.server.use(express.json())
-        await new MigrationUoW().reset()
+        //await new MigrationUoW().reset()
     }
 
     initializeControllers(controllers: any[]){
