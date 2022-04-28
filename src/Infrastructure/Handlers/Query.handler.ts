@@ -1,6 +1,10 @@
 import { Pool } from "pg";
 import { Database } from "../Database";
 
+
+/* 
+    User to avoid SQL Injection and others related major problems
+*/
 export class QueryHandler {
     private pool: Pool
     
