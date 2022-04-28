@@ -1,4 +1,4 @@
-import { Client, Pool } from 'pg'
+import { Pool } from 'pg'
 import { Database } from '../Database'
 import { Migration } from '../../Interfaces/Migration/Migration.interface'
 
@@ -29,7 +29,6 @@ export class AddressMigration implements Migration {
                 if (err) {
                     throw new Error(`Erro ao executar migration Address; Stack: ${err}`)
                 }else{
-                    console.log("Criou Addres")
                     resolve("")
                 }
             })
@@ -45,7 +44,6 @@ export class AddressMigration implements Migration {
                 if (err) {
                     throw new Error(`Erro ao dropar tabela Address; Stack: ${err}`)
                 }else{
-                    console.log("Dropou Addres")
                     resolve("")
                 }
             })

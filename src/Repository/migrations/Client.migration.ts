@@ -1,8 +1,6 @@
-import { Client, Pool } from 'pg'
+import { Pool } from 'pg'
 import { Database } from '../Database'
 import { Migration } from '../../Interfaces/Migration/Migration.interface'
-import { resolve } from 'path'
-import { rejects } from 'assert'
 
 export class ClientMigration implements Migration{
     pool: Pool
@@ -29,7 +27,6 @@ export class ClientMigration implements Migration{
                     throw new Error(`Erro ao executar migration CLIENT; Stack: ${err}`)
                 }
                 else{
-                    console.log("Criou Client")
                     resolve("")
                 }
             })
@@ -46,7 +43,6 @@ export class ClientMigration implements Migration{
                 if (err) {
                     throw new Error(`Erro ao dropar tabela Client; Stack: ${err}`)
                 }else{
-                    console.log("Dropou Client")
                     resolve("")
                 }
             })

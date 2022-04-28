@@ -1,4 +1,4 @@
-import { Pool, Client } from 'pg'
+import { Pool } from 'pg'
 
 export class Database {
     pool: Pool
@@ -12,12 +12,8 @@ export class Database {
             port: 5433,
         })
 
-        this.pool.connect()
-
-        this.pool.query("SELECT NOW() as now", (err, res) => {
-            if (err) {
-                throw new Error(`Erro ao conectar com o banco; Stack: ${err}`)
-            }
+        this.pool.connect().catch((err) => {
+            throw new Error(`Erro ao conectar com o banco; Stack: ${err}`)
         })
     }
 
