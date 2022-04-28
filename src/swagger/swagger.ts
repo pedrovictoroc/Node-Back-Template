@@ -1,6 +1,6 @@
-import { User } from './Models/User.swagger'
-import { PostUser } from './Models/PostUser.swagger'
-import { UserPaths } from './Paths/User.swagger'
+import { Client } from './Models/Client.swagger'
+import { PostClient } from './Models/PostClient.swagger'
+import { ClientPaths } from './Paths/Client.swagger'
 
 export const swaggerDocument = {
     "swagger": "2.0",
@@ -19,15 +19,15 @@ export const swaggerDocument = {
     "produces": ["application/json"],
     "tags": [
         {
-          "name": "User",
-          "description": "All User related endpoints"
+          "name": "Client",
+          "description": "All Client related endpoints"
         }
     ],
     "paths": {
-      ...UserPaths
+      ...ClientPaths
     },
     "definitions": {
-        User,
-        PostUser
+        Client,
+        PostClient
     }
 }

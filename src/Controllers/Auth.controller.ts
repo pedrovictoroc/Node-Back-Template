@@ -1,21 +1,19 @@
 import { Router, Request, Response } from 'express'
-import { Service } from '../service'
-import { setApiResponse } from '../Handlers/ApiResponse.handler'
+import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
 
 export class AuthController {
 
     private prefixPath: string = "/auth"
-    private service: Service
     private router: Router
 
     constructor(){
-        this.service = new Service()
         this.router = Router();
-        this.initializeRoutes()
     }
  
-    public initializeRoutes() {
+    public getRouter() {
         this.router.get(`${this.prefixPath}`, this.login);
+
+        return this.router
     }
 
     private login(request: Request, response: Response){

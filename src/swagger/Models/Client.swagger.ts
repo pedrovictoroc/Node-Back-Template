@@ -1,4 +1,4 @@
-export const User = {
+export const Client = {
     "required": ["name", "socialName", "document"],
     "properties": {
         "name": {

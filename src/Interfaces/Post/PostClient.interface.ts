@@ -1,4 +1,4 @@
-export interface User {
+export interface PostClient {
     name: string
     socialName: string
     document: string

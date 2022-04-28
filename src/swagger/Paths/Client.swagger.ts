@@ -1,8 +1,8 @@
-export const UserPaths = {
-    "/user": {
+export const ClientPaths = {
+    "/client": {
         "get": {
-            "tags": ["User"],
-            "summary": "Get all users",
+            "tags": ["Client"],
+            "summary": "Get all clients",
             "responses": {
                 "200": {
                     "description": "OK",
@@ -12,7 +12,7 @@ export const UserPaths = {
                             "data": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/definitions/User"
+                                    "$ref": "#/definitions/Client"
                                 }
                             },
                             "message": {
@@ -24,15 +24,15 @@ export const UserPaths = {
             }
         },
         "post": {
-            "tags": ["User"],
-            "summary": "Create user",
+            "tags": ["Client"],
+            "summary": "Create Client",
             "parameters": [
                 {
-                    "name": "User",
+                    "name": "Client",
                     "in": "body",
-                    "description": "To be created user",
+                    "description": "To be created Client",
                     "schema": {
-                        "$ref": "#/definitions/PostUser"
+                        "$ref": "#/definitions/PostClient"
                     }
                 }
             ],
@@ -45,7 +45,7 @@ export const UserPaths = {
                             "data": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/definitions/User"
+                                    "$ref": "#/definitions/Client"
                                 }
                             },
                             "message": {
@@ -73,10 +73,10 @@ export const UserPaths = {
             }
         },
     },
-    "/user/:id": {
+    "/client/:id": {
         "get": {
-            "tags": ["User"],
-            "summary": "Get user by ID",
+            "tags": ["Client"],
+            "summary": "Get Client by ID",
             "responses": {
                 "200": {
                     "description": "OK",
@@ -86,7 +86,7 @@ export const UserPaths = {
                             "data": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/definitions/User"
+                                    "$ref": "#/definitions/Client"
                                 }
                             },
                             "message": {

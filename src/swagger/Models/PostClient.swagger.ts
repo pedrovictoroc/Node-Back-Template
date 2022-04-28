@@ -1,4 +1,4 @@
-export const PostUser = {
+export const PostClient = {
     "required": ["name", "socialName", "document", "email", "password"],
     "properties": {
         "name": {
