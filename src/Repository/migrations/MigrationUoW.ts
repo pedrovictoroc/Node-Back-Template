@@ -5,12 +5,12 @@ export class MigrationUoW {
     constructor(){
     }
 
-    async run() {
+    private async run() {
         await new ClientMigration().run()
         await new AddressMigration().run()
     }
 
-    async drop() {
+    private async drop() {
         await new AddressMigration().drop()
         await new ClientMigration().drop()
     }

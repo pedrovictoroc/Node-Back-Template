@@ -4,9 +4,9 @@ import { setApiResponse } from '../Handlers/ApiResponse.handler'
 
 export class AuthController {
 
-    prefixPath: string = "/auth"
-    service: Service
-    router: Router
+    private prefixPath: string = "/auth"
+    private service: Service
+    private router: Router
 
     constructor(){
         this.service = new Service()
@@ -18,7 +18,7 @@ export class AuthController {
         this.router.get(`${this.prefixPath}`, this.login);
     }
 
-    login(request: Request, response: Response){
+    private login(request: Request, response: Response){
         const result: string[] = []
 
         result.push("teste")

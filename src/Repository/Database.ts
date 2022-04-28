@@ -1,7 +1,7 @@
 import { Pool } from 'pg'
 
 export class Database {
-    pool: Pool
+    private pool: Pool
 
     constructor(){
         this.pool = new Pool({

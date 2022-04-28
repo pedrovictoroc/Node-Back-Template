@@ -1,4 +1,4 @@
-export interface Migration {
-    run: () => Promise<any>,
+export interface Migration{
+    run: () => Promise<any>
     drop: () => Promise<any>
 }

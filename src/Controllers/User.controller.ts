@@ -8,9 +8,9 @@ import { Database } from '../Repository/Database'
 
 export class UserController {
 
-    prefixPath: string = "/user"
-    service: Service
-    router: Router
+    private prefixPath: string = "/user"
+    private service: Service
+    private router: Router
 
     constructor(){
         this.service = new Service()
@@ -26,11 +26,11 @@ export class UserController {
         this.router.post(`${this.prefixPath}`, this.create)
     }
 
-    getAll(request: Request, response: Response){
+    private getAll(request: Request, response: Response){
         response.send("teste")
     }
 
-    getById(request: Request, response: Response){
+    private getById(request: Request, response: Response){
         const result: string[] = []
 
         result.push("teste")
@@ -38,7 +38,7 @@ export class UserController {
         response.json(setApiResponse<string[]>(result))
     }
 
-    create(request: Request, response: Response){
+    private create(request: Request, response: Response){
         const result: User[] = []
         
         const toBeCreatedUser: User = request.body

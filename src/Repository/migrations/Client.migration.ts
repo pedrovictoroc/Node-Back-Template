@@ -3,7 +3,7 @@ import { Database } from '../Database'
 import { Migration } from '../../Interfaces/Migration/Migration.interface'
 
 export class ClientMigration implements Migration{
-    pool: Pool
+    private pool: Pool
 
     constructor(){
         this.pool = new Database().getPool()
