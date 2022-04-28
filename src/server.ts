@@ -11,8 +11,13 @@ export class Server {
         this.server = express();
         this.port = process.env.PORT || 3000;
      
+        this.setupServer()
         this.initializeControllers(new ControllerUoW().getControllers());
         this.initializeSwagger()
+    }
+
+    setupServer(){
+        this.server.use(express.json())
     }
 
     initializeControllers(controllers: any[]){

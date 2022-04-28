@@ -2,13 +2,13 @@ export const User = {
     "required": ["name", "socialName", "document"],
     "properties": {
         "name": {
-        "type": "string",
+            "type": "string",
         },
         "socialName": {
-        "type": "string"
+            "type": "string"
         },
         "document": {
-        "type": "string"
+            "type": "string"
         },
     }
 }

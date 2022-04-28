@@ -2,6 +2,8 @@ import { Router, Request, Response } from 'express'
 import { Service } from '../service'
 import { setApiResponse } from '../Handlers/ApiResponse.handler'
 
+import { User } from '../Interfaces/Post/PostUser.interface'
+
 export class UserController {
 
     prefixPath: string = "/user"
@@ -17,6 +19,7 @@ export class UserController {
     public initializeRoutes() {
         this.router.get(`${this.prefixPath}`, this.getAll);
         this.router.get(`${this.prefixPath}/:id`, this.getById);
+        this.router.post(`${this.prefixPath}`, this.create)
     }
 
     getAll(request: Request, response: Response){
@@ -29,5 +32,15 @@ export class UserController {
         result.push("teste")
     
         response.json(setApiResponse<string[]>(result))
+    }
+
+    create(request: Request, response: Response){
+        const result: User[] = []
+        
+        const toBeCreatedUser: User = request.body
+
+        result.push(toBeCreatedUser)
+    
+        response.json(setApiResponse<User[]>(result))
     }
 }
