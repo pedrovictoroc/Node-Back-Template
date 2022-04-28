@@ -4,6 +4,8 @@ import { setApiResponse } from '../Handlers/ApiResponse.handler'
 
 import { User } from '../Interfaces/Post/PostUser.interface'
 
+import { Database } from '../Repository/Database'
+
 export class UserController {
 
     prefixPath: string = "/user"
@@ -17,6 +19,8 @@ export class UserController {
     }
  
     public initializeRoutes() {
+
+        new Database()
         this.router.get(`${this.prefixPath}`, this.getAll);
         this.router.get(`${this.prefixPath}/:id`, this.getById);
         this.router.post(`${this.prefixPath}`, this.create)

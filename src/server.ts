@@ -1,7 +1,9 @@
 import express, { Express } from 'express'
 import * as swaggerUI from 'swagger-ui-express'
 import { swaggerDocument } from './swagger/swagger'
+
 import { ControllerUoW } from './Controllers/ControllerUoW';
+import { MigrationUoW } from './Repository/migrations/MigrationUoW'
 
 export class Server {
     server: Express
@@ -16,8 +18,9 @@ export class Server {
         this.initializeSwagger()
     }
 
-    setupServer(){
+    async setupServer(){
         this.server.use(express.json())
+        await new MigrationUoW().reset()
     }
 
     initializeControllers(controllers: any[]){

@@ -1,0 +1,1 @@
+docker run -d -p 5433:5432 --name liven -e POSTGRES_USER=liven -e POSTGRES_PASSWORD=liven --mount src=db-blog,dst=/var/lib/postgresql/data postgres
