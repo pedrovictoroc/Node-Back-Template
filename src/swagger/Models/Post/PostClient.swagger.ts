@@ -16,5 +16,11 @@ export const PostClient = {
         "password": {
             "type": "string"
         },
+        "addresses": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Address"
+            }
+        },
     }
 }
