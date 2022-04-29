@@ -20,4 +20,15 @@ export class QueryHandler<T> {
             throw new Error(`Error trying to run query; Stack: ${err}`)
         }
     }
+
+    public async getSequence(tableName: string): Promise<string>{
+        try{
+            const SQL = `SELECT nextval('${tableName}_seq');`
+
+            const result = await this.pool.query(SQL)
+            return result.rows[0].nextval
+        }catch(err: any){
+            throw new Error(`Error trying to generate ${tableName}_seq; Stack: ${err}`)
+        }
+    }
 }

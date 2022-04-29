@@ -19,6 +19,10 @@ export class ClientMigration implements Migration{
                 email TEXT NOT NULL,
                 password TEXT NOT NULL
             );
+
+            CREATE SEQUENCE client_seq
+            START 1
+            INCREMENT 1;
         `
 
         return new Promise((resolve, reject) => {
@@ -35,7 +39,9 @@ export class ClientMigration implements Migration{
 
     drop(): Promise<string>{
         const SQL = `
-            DROP TABLE Client
+            DROP TABLE Client;
+            
+            DROP SEQUENCE client_seq;
         `
 
         return new Promise((resolve, reject) => {

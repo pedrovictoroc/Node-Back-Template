@@ -17,9 +17,12 @@ export class ClientRepository {
         return await this.queryHandler.runQuery(SQL)
     }
 
-    public async create(client: Client): Promise<void> {
+    public async create(client: Client): Promise<string> {
+        const newId = await this.queryHandler.getSequence("client")
+        
         const SQL = `
             INSERT INTO Client(
+                id,
                 name,
                 socialName,
                 document,
@@ -31,10 +34,12 @@ export class ClientRepository {
                 $2,
                 $3,
                 $4,
-                $5
+                $5,
+                $6
             )
         `
         const values = [
+            newId,
             client.name,
             client.socialName,
             client.document,
@@ -43,5 +48,7 @@ export class ClientRepository {
         ]
 
         await this.queryHandler.runQuery(SQL, values)
+
+        return newId;
     }
 }

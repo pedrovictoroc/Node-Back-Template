@@ -23,6 +23,10 @@ export class AddressMigration implements Migration {
                 complement TEXT,
                 FOREIGN KEY (clientId) REFERENCES Client (id)
             );
+
+            CREATE SEQUENCE address_seq
+            START 1
+            INCREMENT 1;
         `
         return new Promise((resolve, reject) => {
             this.pool.query(SQL, (err, res) => {
@@ -37,7 +41,9 @@ export class AddressMigration implements Migration {
 
     drop(): Promise<string>{
         const SQL = `
-            DROP TABLE Address
+            DROP TABLE Address;
+            
+            DROP SEQUENCE address_seq;
         `
         return new Promise((resolve, reject) => {
             this.pool.query(SQL, (err, res) => {

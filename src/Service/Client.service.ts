@@ -3,6 +3,7 @@ import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
 import { RepositoryUoW } from '../Infrastructure/Repository/RepositoryUoW'
 
 import { Client } from '../Interfaces/Client.interface'
+import { PostClient } from '../Interfaces/Post/PostClient.interface'
 
 export class ClientService {
     private repositoryUoW: RepositoryUoW
@@ -68,10 +69,16 @@ export class ClientService {
         const result: Client[] = []
     
         try{
-            const toBeCreatedClient: Client = request.body
+            const toBeCreatedClient: PostClient = request.body
             
-            await this.repositoryUoW.clientRepository.create(toBeCreatedClient)
+            const clientId: string = await this.repositoryUoW.clientRepository.create(toBeCreatedClient)
+
+            toBeCreatedClient.addresses.forEach(async (address) => {
+                await this.repositoryUoW.addressRepository.create(address, clientId)
+            })
             
+            result.push(toBeCreatedClient)
+
             return response.status(200).json(setApiResponse<Client[]>(result, sucessMessage))
         }
         catch(err: any){
