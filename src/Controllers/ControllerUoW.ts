@@ -1,5 +1,6 @@
 import { ClientController } from './Client.controller'
 import { AuthController } from './Auth.controller'
+import { AddressController } from './Address.controller'
 
 export class ControllerUoW{
 
@@ -8,7 +9,8 @@ export class ControllerUoW{
     constructor(){
         this.controllers = [
             new AuthController(),
-            new ClientController()
+            new ClientController(),
+            new AddressController()
         ]
     }
 

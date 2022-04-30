@@ -1,0 +1,255 @@
+export const AddressPaths = {
+    "/client/{clientId}/address": {
+        "get": {
+            "tags": ["Address"],
+            "summary": "Get all address from a client",
+            "parameters": [
+                {
+                    "name": "clientId",
+                    "in": "path",
+                    "description": "Client ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "country",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "state",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "city",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "code",
+                    "in": "query",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "required": ["data", "message"],
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/Address"
+                                }
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "post": {
+            "tags": ["Address"],
+            "summary": "Create Address to a client",
+            "parameters": [
+                {
+                    "name": "clientId",
+                    "in": "path",
+                    "description": "Client ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "Address",
+                    "in": "body",
+                    "description": "To be created Address",
+                    "schema": {
+                        "$ref": "#/definitions/PostAddress"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "required": ["data", "message"],
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/Client"
+                                }
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                        }
+                    }
+                },
+                "400": {
+                    "description": "OK",
+                    "schema": {
+                        "required": ["data", "message"],
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
+                                }
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                        }
+                    }
+                }
+            }
+        },
+    },
+    "/client/{clientId}/address/{addressId}": {
+        "get": {
+            "tags": ["Address"],
+            "summary": "Get Address by ID",
+            "parameters": [
+                {
+                    "name": "clientId",
+                    "in": "path",
+                    "description": "Client ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "addressId",
+                    "in": "path",
+                    "description": "Address ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "required": ["data", "message"],
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/GetAddress"
+                                }
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "put": {
+            "tags": ["Address"],
+            "summary": "Update Address by ID",
+            "parameters": [
+                {
+                    "name": "clientId",
+                    "in": "path",
+                    "description": "Client ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "addressId",
+                    "in": "path",
+                    "description": "Address ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "Address",
+                    "in": "body",
+                    "description": "To be updated Address",
+                    "schema": {
+                        "$ref": "#/definitions/PutAddress"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "required": ["data", "message"],
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/PutAddress"
+                                }
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "tags": ["Address"],
+            "summary": "Delete Address by ID",
+            "parameters": [
+                {
+                    "name": "clientId",
+                    "in": "path",
+                    "description": "Client ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                {
+                    "name": "addressId",
+                    "in": "path",
+                    "description": "Address ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "required": ["data", "message"],
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/GetAddress"
+                                }
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                        }
+                    }
+                }
+            }
+        },
+    }
+}

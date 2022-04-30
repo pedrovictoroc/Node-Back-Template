@@ -78,6 +78,8 @@ export class ClientService {
             await this.createClientAddresses(toBeCreatedClient, clientId)
 
             result.push(toBeCreatedClient)
+
+            await this.repositoryUoW.commit();
             
             return response.status(200).json(setApiResponse<ClientInterface[]>(result, sucessMessage))
         }

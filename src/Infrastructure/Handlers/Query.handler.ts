@@ -17,7 +17,7 @@ export class QueryHandler<T> {
         }catch(err: any){
             throw new Error(`Error trying to run query; Stack: ${err}`)
         }
-    }
+    } 
 
     public async getSequence(tableName: string): Promise<string>{
         try{

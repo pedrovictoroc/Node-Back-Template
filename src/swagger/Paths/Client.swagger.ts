@@ -73,7 +73,7 @@ export const ClientPaths = {
             }
         },
     },
-    "/client/:id": {
+    "/client/{id}": {
         "get": {
             "tags": ["Client"],
             "summary": "Get Client by ID",

@@ -1,6 +1,11 @@
 import { Client } from './Models/Client.swagger'
 import { Address } from './Models/Address.swagger'
 import { PostClient } from './Models/Post/PostClient.swagger'
+import { GetAddress } from './Models/Get/Address.swagger'
+import { PutAddress } from './Models/Put/Address.swagger'
+import { PostAddress } from './Models/Post/Address.swagger'
+
+import { AddressPaths } from './Paths/Address.swagger'
 import { ClientPaths } from './Paths/Client.swagger'
 
 export const swaggerDocument = {
@@ -25,11 +30,15 @@ export const swaggerDocument = {
         }
     ],
     "paths": {
-      ...ClientPaths
+      ...ClientPaths,
+      ...AddressPaths
     },
     "definitions": {
         Client,
+        PostClient,
         Address,
-        PostClient
+        GetAddress,
+        PutAddress,
+        PostAddress
     }
 }
