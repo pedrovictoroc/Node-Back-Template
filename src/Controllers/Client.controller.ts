@@ -16,6 +16,8 @@ export class ClientController {
         this.router.get(`${this.prefixPath}`, (request: Request, response: Response) => this.getAll(request, response));
         this.router.get(`${this.prefixPath}/:clientId`, (request: Request, response: Response) => this.getById(request, response));
         this.router.post(`${this.prefixPath}`, (request: Request, response: Response) => this.create(request, response));
+        this.router.put(`${this.prefixPath}/:clientId`, (request: Request, response: Response) => this.update(request, response));
+        this.router.delete(`${this.prefixPath}/:clientId`, (request: Request, response: Response) => this.delete(request, response));
     
         return this.router
     }
@@ -31,5 +33,13 @@ export class ClientController {
 
     private create(request: Request, response: Response){
         this.serviceUoW.clientService.create(request, response)
+    }
+    
+    private update(request: Request, response: Response){
+        this.serviceUoW.clientService.update(request, response)
+    }
+    
+    private delete(request: Request, response: Response){
+        this.serviceUoW.clientService.delete(request, response)
     }
 }

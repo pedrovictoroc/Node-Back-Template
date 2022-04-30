@@ -1,10 +1,13 @@
 import { Request, Response } from 'express'
 import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
 import { RepositoryUoW } from '../Infrastructure/Repository/RepositoryUoW'
+import { AddressInterface } from '../Interfaces/Address.interface'
 
 import { ClientInterface } from '../Interfaces/Client.interface'
 import { GetClient } from '../Interfaces/Get/GetClient.interface'
 import { PostClient } from '../Interfaces/Post/PostClient.interface'
+import { PutAddress } from '../Interfaces/Put/Address.interface'
+import { PutClient } from '../Interfaces/Put/Client.interface'
 
 export class ClientService {
     private repositoryUoW: RepositoryUoW
@@ -64,7 +67,7 @@ export class ClientService {
         const sucessMessage: string = "Cliente criado com sucesso"
         const errorMessage: string = "Erro ao buscar cliente"
         
-        const result: ClientInterface[] = []
+        let result: GetClient[] = []
     
         try{
             const toBeCreatedClient: PostClient = request.body
@@ -75,21 +78,85 @@ export class ClientService {
 
             await this.createClientAddresses(toBeCreatedClient, clientId)
 
-            result.push(toBeCreatedClient)
-
             await this.repositoryUoW.commit();
             
-            return response.status(200).json(setApiResponse<ClientInterface[]>(result, sucessMessage))
+            result.push({
+                id: clientId,
+                ...toBeCreatedClient, 
+            })
+            
+            return response.status(200).json(setApiResponse<GetClient[]>(result, sucessMessage))
         }
         catch(err: any){
             await this.repositoryUoW.rollback();
-            return response.status(400).json(setApiResponse<ClientInterface[]>(result, errorMessage, err.message))
+            return response.status(400).json(setApiResponse<GetClient[]>(result, errorMessage, err.message))
         }
     }
     
+    public async update(request: Request, response: Response){    
+        const sucessMessage: string = "Cliente atualizado com sucesso"
+        const errorMessage: string = "Erro ao atualizar cliente"
+        
+        let result: GetClient[] = []
+    
+        try{
+            const toBeCreatedAddress: PutClient = request.body
+            const clientId: string = request.params.clientId
+            
+            await this.repositoryUoW.beginTransaction();
+            
+            await this.repositoryUoW.clientRepository.update(toBeCreatedAddress, clientId)
+
+            await this.updateClientAddresses(toBeCreatedAddress.addresses, clientId)
+
+            await this.repositoryUoW.commit();
+
+            result.push({
+                id: clientId,
+                ...toBeCreatedAddress
+            })
+
+            return response.status(200).json(setApiResponse<GetClient[]>(result, sucessMessage))
+        }
+        catch(err: any){
+            await this.repositoryUoW.rollback();
+            return response.status(400).json(setApiResponse<GetClient[]>(result, errorMessage, err.message))
+        }
+    }
+
+    public async delete(request: Request, response: Response){    
+        const sucessMessage: string = "Endereço deletado com sucesso"
+        const errorMessage: string = "Erro ao deletar endereço"
+        
+        let result: GetClient[] = []
+    
+        try{
+            const clientId: string = request.params.clientId
+            const addressId: string = request.params.addressId
+            
+            await this.repositoryUoW.beginTransaction();
+            
+            await this.repositoryUoW.clientRepository.delete(clientId)
+
+            await this.repositoryUoW.commit();
+
+            return response.status(200).json(setApiResponse<GetClient[]>(result, sucessMessage))
+        }
+        catch(err: any){
+            await this.repositoryUoW.rollback();
+            return response.status(400).json(setApiResponse<GetClient[]>(result, errorMessage, err.message))
+        }
+    }
+
     private async createClientAddresses(toBeCreatedClient: PostClient, clientId: string){
         return await toBeCreatedClient.addresses.forEach(async (address) => {
             this.repositoryUoW.addressRepository.create(address, clientId)
+        })   
+    }
+    
+    private async updateClientAddresses(toBeUpdatedAddress: PutAddress[], clientId: string){
+        return await toBeUpdatedAddress.forEach(async (address) => {
+            this.repositoryUoW.addressRepository.update(address, clientId, address.id)
         })   
     }
 }
