@@ -12,7 +12,6 @@ export class QueryHandler<T> {
 
     public async runQuery(sql: string, values: any[] = []): Promise<T[]>{
         try{
-            console.log(sql)
             const result = await this.client.query(sql, values)
             return result.rows
         }catch(err: any){

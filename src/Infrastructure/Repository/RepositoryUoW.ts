@@ -54,7 +54,7 @@ export class RepositoryUoW {
 
             this.queryHandler.runQuery(SQL);
         }catch(err: any){
-            throw new Error(`Error rollbaacking transaction; Stack: ${err}`)
+            throw new Error(`Error rollbacking transaction; Stack: ${err}`)
         }
     }
 }
