@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
 import { RepositoryUoW } from '../Infrastructure/Repository/RepositoryUoW'
 
-import { Client } from '../Interfaces/Client.interface'
+import { ClientInterface } from '../Interfaces/Client.interface'
 import { PostClient } from '../Interfaces/Post/PostClient.interface'
 
 export class ClientService {
@@ -17,20 +17,20 @@ export class ClientService {
         const errorMessage: string = "Erro ao encontrar cliente"
         const notFoundMessage: string = "Clientes não encontrados"
     
-        let result: Client[] = []
+        let result: ClientInterface[] = []
     
         try{
-            const toBeFoundClients: Client[] = await this.repositoryUoW.clientRepository.getAll()
+            const toBeFoundClients: ClientInterface[] = await this.repositoryUoW.clientRepository.getAll()
 
             if(!!toBeFoundClients.length){
                 result = toBeFoundClients
-                return response.status(200).json(setApiResponse<Client[]>(result, sucessMessage))
+                return response.status(200).json(setApiResponse<ClientInterface[]>(result, sucessMessage))
             }
             
-            return response.status(404).json(setApiResponse<Client[]>(result, notFoundMessage))
+            return response.status(404).json(setApiResponse<ClientInterface[]>(result, notFoundMessage))
         }
         catch(err: any){
-            return response.status(400).json(setApiResponse<Client[]>(result, errorMessage, err.message))
+            return response.status(400).json(setApiResponse<ClientInterface[]>(result, errorMessage, err.message))
         }
     }
 
@@ -39,10 +39,10 @@ export class ClientService {
         const errorMessage: string = "Erro ao encontrar cliente"
         const notFoundMessage: string = "Cliente não encontrado"
     
-        const result: Client[] = []
+        const result: ClientInterface[] = []
     
         try{
-            const toBeFoundClient: Client = {
+            const toBeFoundClient: ClientInterface = {
                 name: "string",
                 socialName: "string",
                 document: "string",
@@ -52,13 +52,13 @@ export class ClientService {
             
             if(!!toBeFoundClient){
                 result.push(toBeFoundClient)
-                return response.status(200).json(setApiResponse<Client[]>(result, sucessMessage))
+                return response.status(200).json(setApiResponse<ClientInterface[]>(result, sucessMessage))
             }
             
-            return response.status(404).json(setApiResponse<Client[]>(result, notFoundMessage))
+            return response.status(404).json(setApiResponse<ClientInterface[]>(result, notFoundMessage))
         }
         catch(err: any){
-            return response.status(400).json(setApiResponse<Client[]>(result, errorMessage, err.message))
+            return response.status(400).json(setApiResponse<ClientInterface[]>(result, errorMessage, err.message))
         }    
     }
 
@@ -66,24 +66,30 @@ export class ClientService {
         const sucessMessage: string = "Cliente criado com sucesso"
         const errorMessage: string = "Erro ao buscar cliente"
         
-        const result: Client[] = []
+        const result: ClientInterface[] = []
     
         try{
             const toBeCreatedClient: PostClient = request.body
+
+            await this.repositoryUoW.beginTransaction();
             
             const clientId: string = await this.repositoryUoW.clientRepository.create(toBeCreatedClient)
 
-            toBeCreatedClient.addresses.forEach(async (address) => {
-                await this.repositoryUoW.addressRepository.create(address, clientId)
-            })
-            
-            result.push(toBeCreatedClient)
+            await this.createClientAddresses(toBeCreatedClient, clientId)
 
-            return response.status(200).json(setApiResponse<Client[]>(result, sucessMessage))
+            result.push(toBeCreatedClient)
+            
+            return response.status(200).json(setApiResponse<ClientInterface[]>(result, sucessMessage))
         }
         catch(err: any){
-            return response.status(400).json(setApiResponse<Client[]>(result, errorMessage, err.message))
+            await this.repositoryUoW.rollback();
+            return response.status(400).json(setApiResponse<ClientInterface[]>(result, errorMessage, err.message))
         }
-        
+    }
+    
+    private async createClientAddresses(toBeCreatedClient: PostClient, clientId: string){
+        return await toBeCreatedClient.addresses.forEach(async (address) => {
+            this.repositoryUoW.addressRepository.create(address, clientId)
+        })   
     }
 }

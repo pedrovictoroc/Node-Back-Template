@@ -1,12 +1,12 @@
-import { Pool } from 'pg'
+import { Client } from 'pg'
 import { Database } from '../Database'
 import { Migration } from '../../Interfaces/Migration/Migration.interface'
 
 export class ClientMigration implements Migration{
-    private pool: Pool
+    private client: Client
 
     constructor(){
-        this.pool = new Database().getPool()
+        this.client = new Database().getClient()
     }
 
     run(): Promise<string>{
@@ -26,7 +26,7 @@ export class ClientMigration implements Migration{
         `
 
         return new Promise((resolve, reject) => {
-            this.pool.query(SQL, (err, res) => {
+            this.client.query(SQL, (err, res) => {
                 if (err) {
                     reject(`Erro ao executar migration CLIENT; Stack: ${err}`)
                 }
@@ -45,7 +45,7 @@ export class ClientMigration implements Migration{
         `
 
         return new Promise((resolve, reject) => {
-            this.pool.query(SQL, (err, res) => {
+            this.client.query(SQL, (err, res) => {
                 if (err) {
                     reject(`Erro ao dropar tabela Client; Stack: ${err}`)
                 }else{

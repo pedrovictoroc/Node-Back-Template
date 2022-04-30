@@ -1,10 +1,10 @@
-import { Pool } from 'pg'
+import { Client } from 'pg'
 
 export class Database {
-    private pool: Pool
+    private client: Client
 
     constructor(){
-        this.pool = new Pool({
+        this.client = new Client({
             user: 'liven',
             host: 'localhost',
             database: 'liven',
@@ -12,12 +12,12 @@ export class Database {
             port: 5433,
         })
 
-        this.pool.connect().catch((err) => {
+        this.client.connect().catch((err) => {
             throw new Error(`Erro ao conectar com o banco; Stack: ${err}`)
         })
     }
 
-    getPool(): Pool {
-        return this.pool
+    getClient(): Client {
+        return this.client
     }
 }

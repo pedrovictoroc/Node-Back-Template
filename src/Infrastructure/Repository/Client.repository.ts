@@ -1,15 +1,16 @@
 import { QueryHandler } from "../Handlers/Query.handler"
 
-import { Client } from '../../Interfaces/Client.interface'
+import { ClientInterface } from '../../Interfaces/Client.interface'
+import { Client } from "pg"
 
 export class ClientRepository {
-    queryHandler: QueryHandler<Client>
+    queryHandler: QueryHandler<ClientInterface>
 
-    constructor(){
-        this.queryHandler = new QueryHandler()
+    constructor(client: Client){
+        this.queryHandler = new QueryHandler(client)
     }
 
-    public async getAll(): Promise<Client[]>{
+    public async getAll(): Promise<ClientInterface[]>{
         const SQL = `
             SELECT * FROM Client
         `
@@ -17,7 +18,7 @@ export class ClientRepository {
         return await this.queryHandler.runQuery(SQL)
     }
 
-    public async create(client: Client): Promise<string> {
+    public async create(client: ClientInterface): Promise<string> {
         const newId = await this.queryHandler.getSequence("client")
         
         const SQL = `
@@ -48,7 +49,7 @@ export class ClientRepository {
         ]
 
         await this.queryHandler.runQuery(SQL, values)
-
+        
         return newId;
     }
 }

@@ -1,15 +1,16 @@
 import { QueryHandler } from "../Handlers/Query.handler"
 
-import { Address } from "../../Interfaces/Address.interface"
+import { AddressInterface } from "../../Interfaces/Address.interface"
+import { Client } from "pg"
 
 export class AddressRepository {
-    queryHandler: QueryHandler<Address>
+    queryHandler: QueryHandler<AddressInterface>
 
-    constructor(){
-        this.queryHandler = new QueryHandler()
+    constructor(client: Client){
+        this.queryHandler = new QueryHandler(client)
     }
 
-    public async getAll(clientId: string): Promise<Address[]>{
+    public async getAll(clientId: string): Promise<AddressInterface[]>{
         const SQL = `
             SELECT * FROM Address WHERE clientId = $1
         `
@@ -21,7 +22,7 @@ export class AddressRepository {
         return await this.queryHandler.runQuery(SQL, values)
     }
 
-    public async create(address: Address, clientId: string): Promise<void> {
+    public async create(address: AddressInterface, clientId: string): Promise<void> {
         const newId = await this.queryHandler.getSequence("address")
         
         const SQL = `
