@@ -31,7 +31,7 @@ export class AddressMigration implements Migration {
         return new Promise((resolve, reject) => {
             this.client.query(SQL, (err, res) => {
                 if (err) {
-                    reject(`Erro ao executar migration Address; Stack: ${err}`)
+                    reject(`Error while applying Address migration; Stack: ${err}`)
                 }else{
                     resolve("")
                 }
@@ -48,7 +48,7 @@ export class AddressMigration implements Migration {
         return new Promise((resolve, reject) => {
             this.client.query(SQL, (err, res) => {
                 if (err) {
-                    reject(`Erro ao dropar tabela Address; Stack: ${err}`)
+                    reject(`Error while dropping Address table; Stack: ${err}`)
                 }else{
                     resolve("")
                 }

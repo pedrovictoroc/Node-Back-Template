@@ -3,6 +3,7 @@ import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
 import { RepositoryUoW } from '../Infrastructure/Repository/RepositoryUoW'
 
 import { ClientInterface } from '../Interfaces/Client.interface'
+import { GetClient } from '../Interfaces/Get/GetClient.interface'
 import { PostClient } from '../Interfaces/Post/PostClient.interface'
 
 export class ClientService {
@@ -39,26 +40,23 @@ export class ClientService {
         const errorMessage: string = "Erro ao encontrar cliente"
         const notFoundMessage: string = "Cliente não encontrado"
     
-        const result: ClientInterface[] = []
+        let result: GetClient[] = []
     
         try{
-            const toBeFoundClient: ClientInterface = {
-                name: "string",
-                socialName: "string",
-                document: "string",
-                email: "string",
-                password: "string",
+            const clientId: string = request.params.clientId
+            
+            const toBeFoundClient: GetClient[] = await this.repositoryUoW.clientRepository.getById(clientId)
+            
+            if(!!toBeFoundClient.length){
+                toBeFoundClient[0].addresses = await this.repositoryUoW.addressRepository.getAll(clientId, null)
+                result = toBeFoundClient
+                return response.status(200).json(setApiResponse<GetClient[]>(result, sucessMessage))
             }
             
-            if(!!toBeFoundClient){
-                result.push(toBeFoundClient)
-                return response.status(200).json(setApiResponse<ClientInterface[]>(result, sucessMessage))
-            }
-            
-            return response.status(404).json(setApiResponse<ClientInterface[]>(result, notFoundMessage))
+            return response.status(404).json(setApiResponse<GetClient[]>(result, notFoundMessage))
         }
         catch(err: any){
-            return response.status(400).json(setApiResponse<ClientInterface[]>(result, errorMessage, err.message))
+            return response.status(400).json(setApiResponse<GetClient[]>(result, errorMessage, err.message))
         }    
     }
 

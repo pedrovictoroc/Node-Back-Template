@@ -73,10 +73,20 @@ export const ClientPaths = {
             }
         },
     },
-    "/client/{id}": {
+    "/client/{clientId}": {
         "get": {
             "tags": ["Client"],
             "summary": "Get Client by ID",
+            "parameters": [
+                {
+                    "name": "clientId",
+                    "in": "path",
+                    "description": "Client ID",
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+            ],
             "responses": {
                 "200": {
                     "description": "OK",
@@ -86,7 +96,7 @@ export const ClientPaths = {
                             "data": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/definitions/Client"
+                                    "$ref": "#/definitions/GetClient"
                                 }
                             },
                             "message": {

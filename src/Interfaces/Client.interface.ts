@@ -3,5 +3,4 @@ export interface ClientInterface {
     socialName: string
     document: string
     email: string
-    password: string
 }

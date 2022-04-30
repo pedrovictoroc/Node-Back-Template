@@ -14,7 +14,7 @@ export class ClientController {
 
     public getRouter(){
         this.router.get(`${this.prefixPath}`, (request: Request, response: Response) => this.getAll(request, response));
-        this.router.get(`${this.prefixPath}/:id`, (request: Request, response: Response) => this.getById(request, response));
+        this.router.get(`${this.prefixPath}/:clientId`, (request: Request, response: Response) => this.getById(request, response));
         this.router.post(`${this.prefixPath}`, (request: Request, response: Response) => this.create(request, response));
     
         return this.router

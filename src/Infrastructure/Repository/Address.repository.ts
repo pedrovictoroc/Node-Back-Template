@@ -13,7 +13,7 @@ export class AddressRepository {
         this.queryHandler = new QueryHandler(client)
     }
 
-    public async getAll(clientId: string, addressFilter: AddressFilter): Promise<AddressInterface[]>{
+    public async getAll(clientId: string, addressFilter: AddressFilter | null = null): Promise<AddressInterface[]>{
         const SQL = `
             SELECT * FROM Address WHERE clientId = $1
         `
@@ -124,10 +124,12 @@ export class AddressRepository {
         await this.queryHandler.runQuery(SQL, values)
     }
 
-
-    private applyGetAllFilters(SQL: string, values: any[], addressFilter: AddressFilter){
+    private applyGetAllFilters(SQL: string, values: any[], addressFilter: AddressFilter | null = null){
         let sqlWithFilter = SQL
         let valuesWithFilter = values
+
+        if(!addressFilter)
+            return { sqlWithFilter, valuesWithFilter }
 
         if(addressFilter.country){
             values.push(addressFilter.country)

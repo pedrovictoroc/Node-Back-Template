@@ -1,10 +1,10 @@
 import { AddressInterface } from "../Address.interface"
 
-export interface PostClient {
+export interface GetClient {
+    id: string,
     name: string
     socialName: string
     document: string
     email: string
-    password: string,
     addresses: AddressInterface[]
 }
