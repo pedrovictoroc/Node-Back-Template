@@ -1,7 +1,7 @@
 import { Client } from "pg";
 
 /* 
-    User to avoid SQL Injection and others related major problems
+    Used to avoid SQL Injection and others related major problems
 */
 export class QueryHandler<T> {
     private client: Client
