@@ -11,7 +11,7 @@ import { AddressPaths } from './Paths/Address.swagger'
 import { ClientPaths } from './Paths/Client.swagger'
 
 export const swaggerDocument = {
-    "swagger": "2.0",
+    "openapi": "3.0.1",
     "info": {
         "version": "1.0.0",
         "title": "Liven's API Document",
@@ -35,7 +35,8 @@ export const swaggerDocument = {
       ...ClientPaths,
       ...AddressPaths
     },
-    "definitions": {
+    "components": {
+      "schemas":{
         Client,
         GetClient,
         PostClient,
@@ -43,5 +44,15 @@ export const swaggerDocument = {
         GetAddress,
         PutAddress,
         PostAddress
-    }
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "http",
+          "in": "header",
+          "description": "JWT Authorization header using the Bearer scheme.",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
 }

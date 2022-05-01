@@ -3,59 +3,118 @@ export const ClientPaths = {
         "get": {
             "tags": ["Client"],
             "summary": "Get all clients",
+            "security": [{
+                "Bearer": []
+            }],
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/Client"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Client"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "404": {
+                    "description": "Not found",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },
         "post": {
             "tags": ["Client"],
             "summary": "Create Client",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "Client",
                     "in": "body",
                     "description": "To be created Client",
                     "schema": {
-                        "$ref": "#/definitions/PostClient"
+                        "$ref": "#/components/schemas/PostClient"
                     }
                 }
             ],
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/Client"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Client"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
                 },
                 "400": {
-                    "description": "OK",
+                    "description": "Bad request",
+                    
                     "schema": {
                         "required": ["data", "message"],
                         "properties": {
@@ -71,12 +130,15 @@ export const ClientPaths = {
                     }
                 }
             }
-        },
+        }
     },
     "/client/{clientId}": {
         "get": {
             "tags": ["Client"],
             "summary": "Get Client by ID",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",
@@ -90,26 +152,76 @@ export const ClientPaths = {
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/GetClient"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/GetClient"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "404": {
+                    "description": "Not Found",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },
         "put": {
             "tags": ["Client"],
             "summary": "Update Cliente by ID",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",
@@ -124,27 +236,53 @@ export const ClientPaths = {
                     "in": "body",
                     "description": "To be updated Client",
                     "schema": {
-                        "$ref": "#/definitions/PostClient"
+                        "$ref": "#/components/schemas/PostClient"
                     }
                 }
             ],
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/GetClient"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/GetClient"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },
@@ -164,19 +302,45 @@ export const ClientPaths = {
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },

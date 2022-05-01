@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
+import { sign, verify } from 'jsonwebtoken'
 import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
 import { RepositoryUoW } from '../Infrastructure/Repository/RepositoryUoW'
-import { AddressInterface } from '../Interfaces/Address.interface'
 
 import { ClientInterface } from '../Interfaces/Client.interface'
 import { GetClient } from '../Interfaces/Get/GetClient.interface'

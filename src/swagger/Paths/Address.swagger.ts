@@ -44,20 +44,67 @@ export const AddressPaths = {
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/Address"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Address"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "404": {
+                    "description": "Not found",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },
@@ -78,43 +125,53 @@ export const AddressPaths = {
                     "in": "body",
                     "description": "To be created Address",
                     "schema": {
-                        "$ref": "#/definitions/PostAddress"
+                        "$ref": "#/components/schemas/PostAddress"
                     }
                 }
             ],
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/Client"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Address"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
                 },
                 "400": {
-                    "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
                 }
             }
         },
@@ -144,20 +201,67 @@ export const AddressPaths = {
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/GetAddress"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/GetAddress"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "404": {
+                    "description": "Not found",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },
@@ -186,27 +290,53 @@ export const AddressPaths = {
                     "in": "body",
                     "description": "To be updated Address",
                     "schema": {
-                        "$ref": "#/definitions/PutAddress"
+                        "$ref": "#/components/schemas/PutAddress"
                     }
                 }
             ],
             "responses": {
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/PutAddress"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/PutAddress"
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },
@@ -232,22 +362,48 @@ export const AddressPaths = {
                 },
             ],
             "responses": {
+                
                 "200": {
                     "description": "OK",
-                    "schema": {
-                        "required": ["data", "message"],
-                        "properties": {
-                            "data": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/GetAddress"
-                                }
-                            },
-                            "message": {
-                                "type": "string"
-                            },
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
                         }
-                    }
+                    },
+                },
+                "400": {
+                    "description": "Bad request",
+                    "content": {
+                        "application/json": {
+                            "required": ["data", "message"],
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "items": {
+                                        }
+                                    },    
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                },
+                            }
+                        }
+                    },
                 }
             }
         },

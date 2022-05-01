@@ -19,7 +19,7 @@ export const GetClient = {
         "addresses": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/Address"
+                "$ref": "#/components/schemas/Address"
             }
         },
         

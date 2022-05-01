@@ -19,7 +19,7 @@ export const PostClient = {
         "addresses": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/Address"
+                "$ref": "#/components/schemas/Address"
             }
         },
     }
