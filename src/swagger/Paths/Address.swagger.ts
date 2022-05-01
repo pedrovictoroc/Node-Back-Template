@@ -19,28 +19,28 @@ export const AddressPaths = {
                     "name": "country",
                     "in": "query",
                     "schema": {
-                        "type": "integer"
+                        "type": "string"
                     }
                 },
                 {
                     "name": "state",
                     "in": "query",
                     "schema": {
-                        "type": "integer"
+                        "type": "string"
                     }
                 },
                 {
                     "name": "city",
                     "in": "query",
                     "schema": {
-                        "type": "integer"
+                        "type": "string"
                     }
                 },
                 {
                     "name": "code",
                     "in": "query",
                     "schema": {
-                        "type": "integer"
+                        "type": "string"
                     }
                 },
             ],
@@ -117,6 +117,16 @@ export const AddressPaths = {
             "security": [{
                 "Bearer": []
             }],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "required": ["data", "message"],
+                        "schema": {
+                            "$ref": "#/components/schemas/PostAddress"
+                        }
+                    }
+                }
+            },
             "parameters": [
                 {
                     "name": "clientId",
@@ -124,14 +134,6 @@ export const AddressPaths = {
                     "description": "Client ID",
                     "schema": {
                         "type": "integer"
-                    }
-                },
-                {
-                    "name": "Address",
-                    "in": "body",
-                    "description": "To be created Address",
-                    "schema": {
-                        "$ref": "#/components/schemas/PostAddress"
                     }
                 }
             ],
@@ -280,6 +282,16 @@ export const AddressPaths = {
             "security": [{
                 "Bearer": []
             }],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "required": ["data", "message"],
+                        "schema": {
+                            "$ref": "#/components/schemas/PutAddress"
+                        }
+                    }
+                }
+            },
             "parameters": [
                 {
                     "name": "clientId",
@@ -295,14 +307,6 @@ export const AddressPaths = {
                     "description": "Address ID",
                     "schema": {
                         "type": "integer"
-                    }
-                },
-                {
-                    "name": "Address",
-                    "in": "body",
-                    "description": "To be updated Address",
-                    "schema": {
-                        "$ref": "#/components/schemas/PutAddress"
                     }
                 }
             ],

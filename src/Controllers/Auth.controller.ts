@@ -1,24 +1,25 @@
 import { Router, Request, Response } from 'express'
-import { sign } from 'jsonwebtoken'
+
+import { ServiceUoW } from '../Service/ServiceUoW'
 
 export class AuthController {
 
     private prefixPath: string = "/auth"
     private router: Router
+    private serviceUoW: ServiceUoW
 
     constructor(){
+        this.serviceUoW = new ServiceUoW()
         this.router = Router();
     }
  
     public getRouter() {
-        this.router.get(`${this.prefixPath}`, this.login);
+        this.router.post(`${this.prefixPath}`, (request: Request, response: Response) => this.login(request, response));
 
         return this.router
     }
 
     private login(request: Request, response: Response){
-        return response.send(sign({"teste": "teste"}, "teste", {
-            expiresIn: 3000
-        }))
+        this.serviceUoW.authService.validateCredentials(request, response)
     }
 }

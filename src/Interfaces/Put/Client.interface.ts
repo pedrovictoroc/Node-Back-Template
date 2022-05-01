@@ -1,6 +1,7 @@
 import { PutAddress } from "./Address.interface"
 
 export interface PutClient {
+    id: string
     name: string
     socialName: string
     document: string

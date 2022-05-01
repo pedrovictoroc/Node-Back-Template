@@ -79,7 +79,6 @@ export class ClientRepository {
                 password = $5
             WHERE id = $6
         `
-
         const values = [
             client.name,
             client.socialName,
@@ -88,7 +87,7 @@ export class ClientRepository {
             client.password,
             clientId
         ]
-
+        
         await this.queryHandler.runQuery(SQL, values)
     }
 

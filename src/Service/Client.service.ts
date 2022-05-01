@@ -66,7 +66,7 @@ export class ClientService {
 
     public async create(request: Request, response: Response){    
         const sucessMessage: string = "Cliente criado com sucesso"
-        const errorMessage: string = "Erro ao buscar cliente"
+        const errorMessage: string = "Erro ao criar cliente"
         
         let result: GetClient[] = []
     
@@ -103,6 +103,7 @@ export class ClientService {
         try{
             const toBeCreatedAddress: PutClient = request.body
             const clientId: string = request.params.clientId
+
             
             await this.repositoryUoW.beginTransaction();
             
@@ -112,10 +113,7 @@ export class ClientService {
 
             await this.repositoryUoW.commit();
 
-            result.push({
-                id: clientId,
-                ...toBeCreatedAddress
-            })
+            result.push(toBeCreatedAddress)
 
             return response.status(200).json(setApiResponse<GetClient[]>(result, sucessMessage))
         }

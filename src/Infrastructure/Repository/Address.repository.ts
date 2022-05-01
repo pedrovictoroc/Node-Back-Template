@@ -106,6 +106,7 @@ export class AddressRepository {
             addressId,
             clientId,
         ]
+        console.log(values)
 
         await this.queryHandler.runQuery(SQL, values)
     }

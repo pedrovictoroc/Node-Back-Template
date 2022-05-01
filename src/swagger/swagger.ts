@@ -6,7 +6,11 @@ import { PutAddress } from './Models/Put/Address.swagger'
 import { PostAddress } from './Models/Post/Address.swagger'
 
 import { GetClient } from './Models/Get/Client.swagger'
+import { PutClient } from './Models/Put/PutClient.swagger'
 
+import { PostAuth } from './Models/Post/Auth.swagger'
+
+import { AuthPaths } from './Paths/Auth.swagger'
 import { AddressPaths } from './Paths/Address.swagger'
 import { ClientPaths } from './Paths/Client.swagger'
 
@@ -27,19 +31,30 @@ export const swaggerDocument = {
     "produces": ["application/json"],
     "tags": [
         {
+          "name": "Auth",
+          "description": "All Auth related endpoints"
+        },
+        {
           "name": "Client",
           "description": "All Client related endpoints"
+        },
+        {
+          "name": "Address",
+          "description": "All Address related endpoints"
         }
     ],
     "paths": {
+      ...AuthPaths,
       ...ClientPaths,
-      ...AddressPaths
+      ...AddressPaths,
     },
     "components": {
       "schemas":{
+        PostAuth,
         Client,
         GetClient,
         PostClient,
+        PutClient,
         Address,
         GetAddress,
         PutAddress,

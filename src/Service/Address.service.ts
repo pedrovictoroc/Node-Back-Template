@@ -74,7 +74,7 @@ export class AddressService {
 
     public async create(request: Request, response: Response){    
         const sucessMessage: string = "Endereço criado com sucesso"
-        const errorMessage: string = "Erro ao buscar endereço"
+        const errorMessage: string = "Erro ao criar endereço"
         
         const result: AddressInterface[] = []
     

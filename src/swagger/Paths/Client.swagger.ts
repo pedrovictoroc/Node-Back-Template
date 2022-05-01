@@ -76,19 +76,16 @@ export const ClientPaths = {
         "post": {
             "tags": ["Client"],
             "summary": "Create Client",
-            "security": [{
-                "Bearer": []
-            }],
-            "parameters": [
-                {
-                    "name": "Client",
-                    "in": "body",
-                    "description": "To be created Client",
-                    "schema": {
-                        "$ref": "#/components/schemas/PostClient"
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "required": ["data", "message"],
+                        "schema": {
+                            "$ref": "#/components/schemas/PostClient"
+                        }
                     }
                 }
-            ],
+            },
             "responses": {
                 "200": {
                     "description": "OK",
@@ -222,6 +219,16 @@ export const ClientPaths = {
             "security": [{
                 "Bearer": []
             }],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "required": ["data", "message"],
+                        "schema": {
+                            "$ref": "#/components/schemas/PutClient"
+                        }
+                    }
+                }
+            },
             "parameters": [
                 {
                     "name": "clientId",
@@ -229,14 +236,6 @@ export const ClientPaths = {
                     "description": "Client ID",
                     "schema": {
                         "type": "integer"
-                    }
-                },
-                {
-                    "name": "Client",
-                    "in": "body",
-                    "description": "To be updated Client",
-                    "schema": {
-                        "$ref": "#/components/schemas/PostClient"
                     }
                 }
             ],

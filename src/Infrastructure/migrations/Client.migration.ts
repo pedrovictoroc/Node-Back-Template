@@ -15,7 +15,7 @@ export class ClientMigration implements Migration{
                 id serial PRIMARY KEY UNIQUE NOT NULL,    
                 name TEXT NOT NULL,
                 socialName TEXT NOT NULL,
-                document TEXT NOT NULL,
+                document TEXT UNIQUE NOT NULL,
                 email TEXT NOT NULL,
                 password TEXT NOT NULL
             );

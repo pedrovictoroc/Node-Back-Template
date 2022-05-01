@@ -2,6 +2,7 @@ import { Client } from "pg";
 import { Database } from "../Database";
 import { QueryHandler } from "../Handlers/Query.handler";
 import { AddressRepository } from "./Address.repository";
+import { AuthRepository } from "./Auth.repository";
 import { ClientRepository } from "./Client.repository";
 
 export class RepositoryUoW {
@@ -9,6 +10,7 @@ export class RepositoryUoW {
     private client: Client
     private queryHandler: QueryHandler<void>
 
+    authRepository: AuthRepository
     clientRepository: ClientRepository
     addressRepository: AddressRepository
 
@@ -17,6 +19,7 @@ export class RepositoryUoW {
 
         this.queryHandler = new QueryHandler<void>(this.client);
 
+        this.authRepository = new AuthRepository(this.client)
         this.clientRepository = new ClientRepository(this.client)
         this.addressRepository = new AddressRepository(this.client)
     }
