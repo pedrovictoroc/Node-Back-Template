@@ -289,6 +289,9 @@ export const ClientPaths = {
         "delete": {
             "tags": ["Client"],
             "summary": "Delete Client by ID",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",

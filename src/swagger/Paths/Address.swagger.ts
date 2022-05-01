@@ -3,6 +3,9 @@ export const AddressPaths = {
         "get": {
             "tags": ["Address"],
             "summary": "Get all address from a client",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",
@@ -111,6 +114,9 @@ export const AddressPaths = {
         "post": {
             "tags": ["Address"],
             "summary": "Create Address to a client",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",
@@ -180,6 +186,9 @@ export const AddressPaths = {
         "get": {
             "tags": ["Address"],
             "summary": "Get Address by ID",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",
@@ -268,6 +277,9 @@ export const AddressPaths = {
         "put": {
             "tags": ["Address"],
             "summary": "Update Address by ID",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",
@@ -343,6 +355,9 @@ export const AddressPaths = {
         "delete": {
             "tags": ["Address"],
             "summary": "Delete Address by ID",
+            "security": [{
+                "Bearer": []
+            }],
             "parameters": [
                 {
                     "name": "clientId",
