@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express'
-import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
+import { sign } from 'jsonwebtoken'
 
 export class AuthController {
 
@@ -17,5 +17,8 @@ export class AuthController {
     }
 
     private login(request: Request, response: Response){
+        return response.send(sign({"teste": "teste"}, "teste", {
+            expiresIn: 3000
+        }))
     }
 }

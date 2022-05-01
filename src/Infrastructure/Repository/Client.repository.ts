@@ -94,7 +94,7 @@ export class ClientRepository {
 
     public async delete(clientId: string): Promise<void> {
         const SQL = `
-            DELETE FROM Address
+            DELETE FROM Client
             WHERE id = $1
         `
         const values = [

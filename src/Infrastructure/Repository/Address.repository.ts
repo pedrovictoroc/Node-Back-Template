@@ -124,6 +124,20 @@ export class AddressRepository {
         await this.queryHandler.runQuery(SQL, values)
     }
 
+    public async getAddressIdListByClientId(clientId: string): Promise<string[]>{
+        const SQL = `
+            SELECT id FROM Address WHERE clientId = $1
+        `
+
+        const values = [
+            clientId
+        ]
+
+        const result = await this.queryHandler.runQuery(SQL, values)
+    
+        return result.map((r) => r.id)
+    }
+
     private applyGetAllFilters(SQL: string, values: any[], addressFilter: AddressFilter | null = null){
         let sqlWithFilter = SQL
         let valuesWithFilter = values

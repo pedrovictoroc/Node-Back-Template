@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
 import { setApiResponse } from '../ApiHandlers/ApiResponse.handler'
 import { RepositoryUoW } from '../Infrastructure/Repository/RepositoryUoW'
+import { AddressInterface } from '../Interfaces/Address.interface'
 
 import { ClientInterface } from '../Interfaces/Client.interface'
 import { GetClient } from '../Interfaces/Get/GetClient.interface'
@@ -125,19 +126,19 @@ export class ClientService {
     }
 
     public async delete(request: Request, response: Response){    
-        const sucessMessage: string = "Endereço deletado com sucesso"
-        const errorMessage: string = "Erro ao deletar endereço"
+        const sucessMessage: string = "Cliente deletado com sucesso"
+        const errorMessage: string = "Erro ao deletar cliente"
         
         let result: GetClient[] = []
     
         try{
             const clientId: string = request.params.clientId
-            const addressId: string = request.params.addressId
+            
+            const addressList: string[] = await this.repositoryUoW.addressRepository.getAddressIdListByClientId(clientId)
             
             await this.repositoryUoW.beginTransaction();
-            
+            await this.deleteClientAddresses(addressList, clientId)
             await this.repositoryUoW.clientRepository.delete(clientId)
-
             await this.repositoryUoW.commit();
 
             return response.status(200).json(setApiResponse<GetClient[]>(result, sucessMessage))
@@ -157,6 +158,12 @@ export class ClientService {
     private async updateClientAddresses(toBeUpdatedAddress: PutAddress[], clientId: string){
         return await toBeUpdatedAddress.forEach(async (address) => {
             this.repositoryUoW.addressRepository.update(address, clientId, address.id)
+        })   
+    }
+
+    private async deleteClientAddresses(toBeDeletedAddress: string[], clientId: string){
+        return await toBeDeletedAddress.forEach(async (addressId) => {
+            this.repositoryUoW.addressRepository.delete(clientId, addressId)
         })   
     }
 }
