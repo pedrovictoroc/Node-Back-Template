@@ -21,8 +21,25 @@ export class ClientMigration implements Migration{
             );
 
             CREATE SEQUENCE client_seq
-            START 1
+            START 2
             INCREMENT 1;
+            
+            INSERT INTO Client(
+                id,
+                name,
+                socialName,
+                document,
+                email,
+                password
+            )
+            VALUES (
+                1,
+                'teste',
+                'teste',
+                '00000000000',
+                'teste@teste.com',
+                'teste'
+            );
         `
 
         return new Promise((resolve, reject) => {

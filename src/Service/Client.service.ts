@@ -101,19 +101,19 @@ export class ClientService {
         let result: GetClient[] = []
     
         try{
-            const toBeCreatedAddress: PutClient = request.body
+            const toBeupdatedClient: PutClient = request.body
             const clientId: string = request.params.clientId
 
             
             await this.repositoryUoW.beginTransaction();
             
-            await this.repositoryUoW.clientRepository.update(toBeCreatedAddress, clientId)
+            await this.repositoryUoW.clientRepository.update(toBeupdatedClient, clientId)
 
-            await this.updateClientAddresses(toBeCreatedAddress.addresses, clientId)
+            await this.updateClientAddresses(toBeupdatedClient.addresses, clientId)
 
             await this.repositoryUoW.commit();
 
-            result.push(toBeCreatedAddress)
+            result.push(toBeupdatedClient)
 
             return response.status(200).json(setApiResponse<GetClient[]>(result, sucessMessage))
         }

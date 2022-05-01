@@ -38,4 +38,8 @@ export class Server {
             console.log(`⚡️[server]: Server is running at https://localhost:${this.port}`);
         });
     }
+
+    getServer(){
+        return this.server
+    }
 }
