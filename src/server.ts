@@ -1,7 +1,8 @@
 import express, { Express } from 'express'
 import * as swaggerUI from 'swagger-ui-express'
-import { swaggerDocument } from './swagger/swagger'
+import dotenv from 'dotenv'
 
+import { swaggerDocument } from './swagger/swagger'
 import { ControllerUoW } from './Controllers/ControllerUoW';
 import { MigrationUoW } from './Infrastructure/Migrations/MigrationUoW'
 
@@ -10,8 +11,9 @@ export class Server {
     port: string | number
 
     constructor() {
+        dotenv.config()
         this.server = express();
-        this.port = process.env.PORT || 3000;
+        this.port = Number(process.env.PORT) || 3000;
      
         this.setupServer()
         this.initializeControllers(new ControllerUoW().getControllers());
@@ -20,7 +22,8 @@ export class Server {
 
     async setupServer(){
         this.server.use(express.json())
-        //await new MigrationUoW().reset()
+        if(process.env.SHOULD_RESTART_DATABASE === "true")
+            await new MigrationUoW().reset()
     }
 
     initializeControllers(controllers: any[]){

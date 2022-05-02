@@ -56,6 +56,10 @@ This project was made using the following libraries:
 <!-- GETTING STARTED -->
 ## Getting Started
 
+### Setting Up
+
+Go to the .env file and modify as you need. If you want to use the same docker script but with different parameters, remember to use the same values in the .env and in the script
+
 ### Installation
 
 1. Clone the repo
@@ -101,8 +105,10 @@ This project was made using the following libraries:
     |   ├── index.ts
     |   ├── server.ts   
     |   └── jest.config.ts    
-    ├── tsconfig.json       
-    ├── babel.config.js
+    ├── tsconfig.json            
+    ├── .env     
+    ├── .gitignore
+    ├── docker.up
     └── README.md
 
 <p align="right">(<a href="#top">back to top</a>)</p>
