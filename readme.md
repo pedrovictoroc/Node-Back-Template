@@ -70,9 +70,16 @@ Go to the .env file and modify as you need. If you want to use the same docker s
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. Settup .env file
+   ```sh
+   JWT_SECRET = ""
+   PORT = ""
+   SHOULD_RESTART_DATABASE = ""
+   DATABASE_USER = ""
+   DATABASE_HOST = ""
+   DATABASE_NAME = ""
+   DATABASE_PASSWORD = ""
+   DATABASE_PORT = ""
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
