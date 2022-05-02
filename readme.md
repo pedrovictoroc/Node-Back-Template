@@ -1,3 +1,5 @@
+Many thanks for the creators of [this readme template repository!!!](https://github.com/kriasoft/Folder-Structure-Conventions)
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
