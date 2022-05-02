@@ -148,18 +148,27 @@ export class ClientService {
     }
 
     private async createClientAddresses(toBeCreatedClient: PostClient, clientId: string){
+        if(!toBeCreatedClient)
+            return
+            
         return await toBeCreatedClient.addresses.forEach(async (address) => {
             this.repositoryUoW.addressRepository.create(address, clientId)
         })   
     }
     
     private async updateClientAddresses(toBeUpdatedAddress: PutAddress[], clientId: string){
+        if(!toBeUpdatedAddress)
+            return
+
         return await toBeUpdatedAddress.forEach(async (address) => {
             this.repositoryUoW.addressRepository.update(address, clientId, address.id)
         })   
     }
 
     private async deleteClientAddresses(toBeDeletedAddress: string[], clientId: string){
+        if(!toBeDeletedAddress)
+            return
+
         return await toBeDeletedAddress.forEach(async (addressId) => {
             this.repositoryUoW.addressRepository.delete(clientId, addressId)
         })   

@@ -3,7 +3,6 @@ import { verify } from 'jsonwebtoken'
 
 export function authHandler(request: Request, response: Response, next: NextFunction){
     const secret = process.env.JWT_SECRET
-
     if(!secret)
       return response.status(401).json({ auth: false, message: 'Problem while decoding token.' });
       

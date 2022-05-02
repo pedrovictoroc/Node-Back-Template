@@ -25,11 +25,15 @@ export class AuthService {
             const toBeFoundClient: string[] = await this.repositoryUoW.authRepository.validateCredentials(authCredentials)
             
             if(!!toBeFoundClient.length){
+                const secret = process.env.JWT_SECRET
+                if(!secret)
+                  return response.status(401).json({ auth: false, message: 'Problem while decoding token.' });
+                
                 const token = sign(
                     {
                         id: toBeFoundClient[0]
                     }, 
-                    "teste", 
+                    secret, 
                     {
                         expiresIn: 3000
                     }
